@@ -1,4 +1,3 @@
-import pygame
 from classes.Square import Square
 
 class Board:
