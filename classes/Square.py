@@ -6,13 +6,19 @@ class Square:
         self.y = y
         self.width = width
         self.height = height
+        self.abs_x = x * width
+        self.abs_y = y * height
+        self.abs_pos = (self.abs_x, self.abs_y)
+        self.pos = (x, y)
         self.color = 'light' if (x + y) % 2 == 0 else 'dark'
-        self.draw_color = (238, 238, 210, 255) if self.color == 'light' else (118, 150, 86, 255)
+        self.draw_color = (121, 72, 57, 255) if self.color == 'light' else (93, 50, 49, 255)
+        self.highlight_color = (153, 207, 224) if self.color == 'light' else (75, 169, 200)
+        self.occupying_piece = None
         self.coord = self.get_coord()
         self.highlight = False
         self.rect = pygame.Rect(
-            self.x * width,
-            self.y * height,
+            self.abs_x,
+            self.abs_y,
             self.width,
             self.height
         )
@@ -23,4 +29,12 @@ class Square:
         return columns[self.x] + str(self.y + 1)
 
     def draw(self, display):
-        pygame.draw.rect(display, self.draw_color, self.rect)
+        if self.highlight:
+            pygame.draw.rect(display, self.highlight_color, self.rect)
+        else:
+            pygame.draw.rect(display, self.draw_color, self.rect)
+
+        if self.occupying_piece != None:
+            centering_rect = self.occupying_piece.img.get_rect()
+            centering_rect.center = self.rect.center
+            display.blit(self.occupying_piece.img, centering_rect.topleft)
