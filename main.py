@@ -17,9 +17,13 @@ def draw(display):
 if __name__ == '__main__':
 	running = True
 	while running:
+		mx, my = pygame.mouse.get_pos()
 		for event in pygame.event.get():
 			# Sair do jogo
 			if event.type == pygame.QUIT:
 				running = False
+			elif event.type == pygame.MOUSEBUTTONDOWN: 
+				if event.button == 1:
+					board.handle_click(mx, my)
 				
 		draw(screen)
