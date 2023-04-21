@@ -41,3 +41,6 @@ class Piece:
         else:
             board.selected_piece = None
             return False
+        
+    def attacking_squares(self, board):
+        return self.get_moves(board)
