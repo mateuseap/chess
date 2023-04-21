@@ -1,5 +1,6 @@
 from classes.Square import Square
 from classes.pieces.Pawn import Pawn
+from classes.pieces.Knight import Knight
 
 class Board:
     def __init__(self, width, height):
@@ -48,6 +49,10 @@ class Board:
                     square = self.get_square_from_pos((x, y))
                     if piece[1] == 'P':
                         square.occupying_piece = Pawn(
+                            (x, y), 'white' if piece[0] == 'w' else 'black', self
+                        )
+                    elif piece[1] == 'N':
+                        square.occupying_piece = Knight(
                             (x, y), 'white' if piece[0] == 'w' else 'black', self
                         )
 
