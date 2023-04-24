@@ -2,6 +2,7 @@ from classes.Square import Square
 from classes.pieces.Pawn import Pawn
 from classes.pieces.Knight import Knight
 from classes.pieces.Bishop import Bishop
+from classes.pieces.Rook import Rook
 
 class Board:
     def __init__(self, width, height):
@@ -58,6 +59,10 @@ class Board:
                         )
                     elif piece[1] == 'B':
                         square.occupying_piece = Bishop(
+                            (x, y), 'white' if piece[0] == 'w' else 'black', self
+                        )
+                    elif piece[1] == 'R':
+                        square.occupying_piece = Rook(
                             (x, y), 'white' if piece[0] == 'w' else 'black', self
                         )
 
